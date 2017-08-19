@@ -13,7 +13,7 @@ if(isset($_GET["subject"])){
 
 ?>
 <div id="navigation" class="subjects">
-    <ul class="subjects">
+    <ul>
                 <?php
                     $subject_set = find_all_subjects();
                 ?>
@@ -22,7 +22,14 @@ if(isset($_GET["subject"])){
                     while($subject_row = mysqli_fetch_assoc($subject_set)) {
                 ?>
 
-            <li>    <a href="manage_contents.php?subject=<?php echo urlencode($subject_row['id'])?>">
+                <?php
+                echo "<li";
+                if($selected_subject_id == $subject_row['id']){
+                    echo " class=\"selected\"";
+                }
+                echo ">";
+                ?>
+                        <a href="manage_contents.php?subject=<?php echo urlencode($subject_row['id'])?>">
                         <?php echo $subject_row['menu_name'] ?>
                     </a>
 
@@ -33,7 +40,13 @@ if(isset($_GET["subject"])){
                 <ul class="pages">
                     <?php while($page_row = mysqli_fetch_assoc($page_set)) {?>
 
-                        <li>
+                    <?php
+                    echo "<li";
+                    if($selected_page_id == $page_row['id']){
+                        echo " class=\"selected\"";
+                    }
+                    echo ">";
+                    ?>
                             <a href="manage_contents.php?page=<?php echo urlencode($page_row['id'])?>">
                             <?php echo $page_row['menu_name'];} ?>
                             </a>
@@ -49,8 +62,8 @@ if(isset($_GET["subject"])){
     </ul>
         <div id="page">
             <h2>Manage Content</h2>
-                <?php echo $selected_page_id; ?>
-                <?php echo $selected_subject_id; ?> <br />
+<!--                --><?php //echo "pageid" . $selected_page_id; ?>
+<!--                --><?php //echo "subjectid" . $selected_subject_id; ?><!-- <br />-->
             <main>
 
             </main>
