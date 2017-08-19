@@ -32,6 +32,43 @@
         return $page_set;
 	}
 
+	function find_subject_by_id($subject_id){
+	    global $connection;
+
+        $safe_id = mysqli_real_escape_string($connection,$subject_id);
+
+        $query  = "SELECT * ";
+        $query .= "FROM subjects ";
+        $query .= "WHERE id = {$safe_id} ";
+        $query .= "LIMIT 1 ";
+        $query .= ";";
+        $subject = mysqli_query($connection,$query);
+        confirm_query($subject);
+        if($subject = mysqli_fetch_assoc($subject)){
+            return $subject;
+        } else{
+            return null;
+        }
+    }
+    function find_page_by_id($page_id){
+        global $connection;
+
+        $safe_id = mysqli_real_escape_string($connection,$page_id);
+
+        $query  = "SELECT * ";
+        $query .= "FROM pages ";
+        $query .= "WHERE id = {$safe_id} ";
+        $query .= "LIMIT 1";
+        $query .= ";";
+        $page = mysqli_query($connection,$query);
+        confirm_query($page);
+        if($page = mysqli_fetch_assoc($page)){
+            return $page;
+        } else{
+            return null;
+        }
+    }
+
 	function navigation($subject_id, $page_id)
     {
     $output = "<ul class=\"subjects\">";
