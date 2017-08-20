@@ -52,10 +52,18 @@ ul.pages { padding-left: 2em; list-style: square; font-weight: normal}
 .selected { font-weight: bold; }
 
 /* Page Content */
-#page { 
-	float: left; height: 100%;
-	padding-left: 2em; vertical-align: top; 
+#page {
+	float: left;
+	height: 100%;
+	padding-left: 2em;
+	vertical-align: top;
 	background: #FCCEB0;
 }
 #page h2 { color: #8D0D19; margin-top: 1em;}
 #page h3 { color: #8D0D19; }
+
+div.message {
+	border: 2px solid #8D0D19;
+	color: #8D0D19; font-weight: bold;
+	margin: 1em 0 ; padding: 1em;
+}

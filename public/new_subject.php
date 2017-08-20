@@ -1,3 +1,4 @@
+<?php require_once("../includes/session.php")?>
 <?php include("../includes/layouts/header.html")?>
 <?php require_once("../includes/functions.php")?>
 
@@ -17,10 +18,13 @@ if(isset($_GET["subject"])){
 <div id="navigation">
     <?php
     echo navigation($selected_subject_id,$selected_page_id);
-?>
+    ?>
 </div>
+
         <div id="form">
             <h2>Create a Subject</h2>
+                <?php echo message()?>
+            </div>
 
             <form action="create_subject.php" method="post">
                 <p>Menu name:
@@ -30,7 +34,7 @@ if(isset($_GET["subject"])){
                     <select name="position">
                         <?php
                         $subject_count = mysqli_num_rows(find_all_subjects());
-                        for($count=1; $count <= ($subject_count + 2); $count++) {
+                        for($count=1; $count <= ($subject_count + 1); $count++) {
                             echo "<option value=\"{$count}\">{$count}</option>";
                         }
                         ?>
@@ -41,7 +45,7 @@ if(isset($_GET["subject"])){
                     &nbsp;
                     <input type="radio" name="visible" value="1" /> Yes
                 </p>
-                <input type="submit" value="Create Subject" />
+                <input type="submit" name="submit" value="Create Subject" />
             </form>
             <br />
             <a href="manage_contents.php">Cancel</a>

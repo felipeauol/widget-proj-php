@@ -1,3 +1,4 @@
+<?php require_once("../includes/session.php")?>
 <?php include("../includes/layouts/header.html")?>
 <?php require_once("../includes/functions.php")?>
 
@@ -21,6 +22,10 @@ if(isset($_GET["subject"])){
 </div>
         <div id="page">
             <h2>Manage Content</h2>
+
+<!--            FIX: Ensure style is applying to the "message" divs-->
+            <?php echo message() ?>
+
                 <?php
                 if(isset($selected_subject_id)){
                     $current_subject = find_subject_by_id($selected_subject_id);
