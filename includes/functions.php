@@ -3,6 +3,7 @@
         header("Location: " . $new_location);
         exit;
     }
+
     function mysqli_prep($string) {
     global $connection;
 
@@ -14,6 +15,7 @@
 			die("Database query failed.");
 		}
 	}
+
 	function find_all_subjects(){
        	global $connection;
 
@@ -41,7 +43,6 @@
 
         return $page_set;
 	}
-
 	function find_subject_by_id($subject_id){
 	    global $connection;
 
@@ -117,5 +118,20 @@
             $output .= "</ul></li>";
         }
         $output .= "</ul>";
+        return $output;
+    }
+
+    function form_errors($errors=array()) {
+        $output = "";
+        if (!empty($errors)) {
+            $output .= "<div class=\"error\">";
+            $output .= "Please fix the following errors:";
+            $output .= "<ul>";
+            foreach ($errors as $key => $error) {
+                $output .= "<li>{$error}</li>";
+            }
+            $output .= "</ul>";
+            $output .= "</div>";
+        }
         return $output;
     }

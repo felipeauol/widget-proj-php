@@ -24,6 +24,13 @@ if(isset($_GET["subject"])){
         <div id="form">
             <h2>Create a Subject</h2>
                 <?php echo message()?>
+
+                <?php
+                if (isset($_SESSION['errors'])){
+                    echo "<ul>";
+                    echo form_errors($_SESSION['errors']);
+                    echo "</ul>";
+                }; ?>
             </div>
 
             <form action="create_subject.php" method="post">

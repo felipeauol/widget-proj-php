@@ -8,7 +8,7 @@ session_start();
             $output .= htmlentities($_SESSION['message']);
             $output .= "</div>";
 
-//            $_SESSION["message"] = null;
+            $_SESSION["message"] = null;
             return $output;
         }
     }
