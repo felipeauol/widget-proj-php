@@ -30,6 +30,8 @@ if(isset($_GET["subject"])){
                 if(isset($selected_subject_id)){
                     $current_subject = find_subject_by_id($selected_subject_id);
                     echo $current_subject['menu_name'];
+                    echo "<br />";
+                    echo "<a href=\"edit_subject.php?subject=$selected_subject_id\">Edit Subject</a>";
                 }
                 elseif(isset($selected_page_id)){
                     $current_page = find_page_by_id($selected_page_id);
@@ -38,6 +40,7 @@ if(isset($_GET["subject"])){
                     echo "Please select a page";
                 }
                 ?>
+
         </div>
 </div>
 <?php include("../includes/layouts/footer.html")?>
