@@ -23,7 +23,7 @@ if(isset($_GET["subject"])){
         <div id="page">
             <h2>Manage Content</h2>
 
-<!--            FIX: Ensure style is applying to the "message" divs-->
+<!--            FIXME: Ensure style is applying to the "message" divs-->
             <?php echo message() ?>
 
                 <?php
