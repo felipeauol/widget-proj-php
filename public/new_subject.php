@@ -20,7 +20,7 @@ if(isset($_GET["subject"])){
     echo navigation($selected_subject_id,$selected_page_id);
     ?>
 </div>
-
+    <div id="page">
         <div id="form">
             <h2>Create a Subject</h2>
                 <?php echo message()?>
@@ -57,9 +57,8 @@ if(isset($_GET["subject"])){
             <br />
             <a href="manage_contents.php">Cancel</a>
 
-
         </div>
-</div>
+    </div>
 <?php include("../includes/layouts/footer.html")?>
 
 <?php mysqli_close($connection); ?>

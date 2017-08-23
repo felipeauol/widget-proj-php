@@ -28,17 +28,34 @@ if(isset($_GET["subject"])){
                 <?php
                 if(isset($selected_subject_id)){
                     $current_subject = find_subject_by_id($selected_subject_id);
-                    echo $current_subject['menu_name'];
+                    echo "Subject: " . htmlentities($current_subject['menu_name']);
+                    echo "<br />";
+                    echo "Position: " . htmlentities($current_subject['position']);
+                    echo "<br />";
+                    echo "Visible: " . htmlentities($current_subject['visible']);
                     echo "<br />";
                     echo "<a href=\"edit_subject.php?subject=$selected_subject_id\">Edit Subject</a>";
                 }
                 elseif(isset($selected_page_id)){
                     $current_page = find_page_by_id($selected_page_id);
-                    echo $current_page['menu_name'];
+                    echo htmlentities($current_page['menu_name']);
+                    echo "<br />";
+                    echo "Position: " . htmlentities($current_page['position']);
+                    echo "<br />";
+                    echo "Visible: " . htmlentities($current_page['visible']);
+                    echo "<br />";
+                    echo "Content: ";
+                    echo "<br />";
+                    echo "<br />";
+                    ?>
+                    <div class="view-content">
+                   <?php echo htmlentities($current_page['content']);?>
+                   </div>
+                    <?php
                 }else{
                     echo "Please select a page";
-                }
-                ?>
+                } ?>
+
 
         </div>
 </div>

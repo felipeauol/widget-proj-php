@@ -41,7 +41,6 @@ if (!$selected_subject_id) {
             $_SESSION["message"] = "Subject updated.";
             redirect_to("manage_contents.php");
         } else $message = "Subject update Failed";
-
     }
 }
 ?>
@@ -57,18 +56,21 @@ if (!$selected_subject_id) {
             <?php if(!empty($message)){
                 echo "<div class=\"message\">" . $message . "</div>";
             }?>
+            <div id="error">
             <?php if(isset($_POST['submit'])){echo form_errors($errors);} ?>
+            </div>
             <?php echo message() ?>
+
         <div id="form">
             <h2>Edit Subject:
             <?php if(isset($selected_subject_id)){
                 $subject = find_subject_by_id($selected_subject_id);
-                echo $subject['menu_name'];
+                echo htmlentities($subject['menu_name']);
             }?>
             </h2>
 
             <?php if(isset($output)){
-                echo $output;
+                echo htmlentities($output);
             }?>
 
         </div>
@@ -79,7 +81,7 @@ if (!$selected_subject_id) {
         ?>
          " method="post">
             <p>Menu name:
-                <input type="text" name="menu_name" value="<?php if(isset($selected_subject_id)) {echo $subject['menu_name'];} ?>"/>
+                <input type="text" name="menu_name" value="<?php if(isset($selected_subject_id)) {echo htmlspecialchars($subject['menu_name']);}?>"/>
             </p>
             <p>Position:
                 <select name="position">
@@ -106,7 +108,7 @@ if (!$selected_subject_id) {
         <a href="manage_contents.php">Cancel</a>
         &nbsp;
         &nbsp;
-        <a href="delete_subject.php?subject=<?php echo $selected_subject_id ?>" onclick="return confirm('Are you sure?')">Delete</a>
+        <a href="delete_subject.php?subject=<?php echo urlencode($selected_subject_id)?>" onclick="return confirm('Are you sure?')">Delete</a>
         </div>
 
     </div>

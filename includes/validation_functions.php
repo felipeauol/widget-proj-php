@@ -21,7 +21,7 @@ function validate_presences($required_fields) {
   foreach($required_fields as $field) {
     $value = trim($_POST[$field]);
   	if (!has_presence($value)) {
-  		$errors[$field] = fieldname_as_text($field) . " can't be blank";
+  		$errors[$field] = htmlentities(fieldname_as_text($field)) . " can't be blank";
   	}
   }
 }
@@ -38,7 +38,7 @@ function validate_max_lengths($fields_with_max_lengths) {
 	foreach($fields_with_max_lengths as $field => $max) {
 		$value = trim($_POST[$field]);
 	  if (!has_max_length($value, $max)) {
-	    $errors[$field] = fieldname_as_text($field) . " is too long";
+	    $errors[$field] = htmlentities(fieldname_as_text($field)) . " is too long";
 	  }
 	}
 }
