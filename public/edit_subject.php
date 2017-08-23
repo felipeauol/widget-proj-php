@@ -58,7 +58,7 @@ if (!$selected_subject_id) {
                 echo "<div class=\"message\">" . $message . "</div>";
             }?>
             <?php if(isset($_POST['submit'])){echo form_errors($errors);} ?>
-
+            <?php echo message() ?>
         <div id="form">
             <h2>Edit Subject:
             <?php if(isset($selected_subject_id)){
@@ -104,8 +104,9 @@ if (!$selected_subject_id) {
         </form>
         <br />
         <a href="manage_contents.php">Cancel</a>
-        <br/>
-
+        &nbsp;
+        &nbsp;
+        <a href="delete_subject.php?subject=<?php echo $selected_subject_id ?>" onclick="return confirm('Are you sure?')">Delete</a>
         </div>
 
     </div>
