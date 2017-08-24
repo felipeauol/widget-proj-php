@@ -6,14 +6,19 @@
 <?php find_selected_page();?>
 
 <?php
-//if (!$selected_page_id) {
-//    // subject ID was missing or invalid or
-//    // subject couldn't be found in database
-//    redirect_to("manage_contents.php");
-//}
-//?>
+if (!$selected_page_id) {
+//subject ID was missing or invalid or
+//subject couldn't be found in database
+redirect_to("manage_contents.php");
+}
+?>
 
 <?php if(isset($_POST['submit'])) {
+
+// Find position of page being edited
+    $current_page = find_page_by_id($selected_page_id);
+    $old_position = $current_page['position'];
+
 
     $required_fields = array("menu_name", "position", "visible", "content");
     validate_presences($required_fields);
@@ -29,6 +34,13 @@
         $content = (string)$_POST['content'];
         $safe_content = mysqli_real_escape_string($connection,$content);
 
+        // Look up page within subject that currently holds the new position
+        $page_set = find_pages_for_subject($current_page['subject_id']);
+        while ($subject_row = mysqli_fetch_assoc($page_set)) {
+            if($subject_row['position'] == $new_position){
+                $swap_page = $subject_row;
+            }
+        }
 
         $query = "UPDATE pages ";
         $query .= "SET menu_name = '{$menu_name}', position = {$new_position}, visible = {$visible}, content = '{$safe_content}'";
@@ -41,6 +53,13 @@
 
         if ($result && mysqli_affected_rows($connection) == 1) {
             // Success
+            $query  = "UPDATE pages ";
+            $query .= "SET position = {$old_position} ";
+            $query .= "WHERE id = {$swap_page['id']} ";
+            $query .= "LIMIT 1";
+            $query .= ";";
+            $result = mysqli_query($connection, $query);
+
             $_SESSION["message"] = "Page updated.";
             redirect_to("manage_contents.php");
         } else $message = "Page update Failed";
