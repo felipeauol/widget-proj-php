@@ -23,7 +23,7 @@ if(isset($_GET["subject"])){
         <div id="page">
             <h2>Manage Content</h2>
 
-            <?php echo message() ?>
+            <?php echo message(); ?>
 
                 <?php
                 if(isset($selected_subject_id)){
@@ -52,6 +52,7 @@ if(isset($_GET["subject"])){
                    <?php echo htmlentities($current_page['content']);?>
                    </div>
                     <?php
+                    echo "<a href=\"edit_page.php?page=$selected_page_id\">Edit Page</a>";
                 }else{
                     echo "Please select a page";
                 } ?>

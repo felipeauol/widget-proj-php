@@ -60,5 +60,4 @@ if(isset($_GET["subject"])){
         </div>
     </div>
 <?php include("../includes/layouts/footer.html")?>
-
 <?php mysqli_close($connection); ?>
