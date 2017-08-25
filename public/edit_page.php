@@ -124,8 +124,7 @@ redirect_to("manage_contents.php");
                 &nbsp;
                 <input type="radio" name="visible" value="1" <?php if( isset($selected_page_id) && $page['visible'] == 1) {echo "checked=checked";} ?> /> Yes
             </p>
-            <br>Content:</br>
-
+            <p>Content:</br>
                 <textarea rows="12" cols="120" name="content"> <?php if( isset($selected_page_id)) {echo htmlentities($page['content']);} ?></textarea>
             </p>
             <input type="submit" name="submit" value="Save" />
@@ -135,7 +134,7 @@ redirect_to("manage_contents.php");
         <a href="manage_contents.php">Cancel</a>
         &nbsp;
         &nbsp;
-        <a href="delete_subject.php?page=<?php echo urlencode($selected_page_id)?>" onclick="return confirm('Are you sure?')">Delete</a>
+        <a href="delete_page.php?page=<?php echo urlencode($selected_page_id)?>" onclick="return confirm('Are you sure?')">Delete</a>
         </div>
 
     </div>

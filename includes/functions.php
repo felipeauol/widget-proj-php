@@ -134,6 +134,13 @@
             $output .= "</ul></li>";
         }
         $output .= "</ul>";
+
+        $output .= "<br/> <br/> <br/>";
+
+
+        $output .= "<a id=\"button\" href=\"new_subject.php\"> New Subject</a><br/><br/>";
+
+        $output .= "<a id=\"button\" href=\"new_page.php\"> New Page</a>";
         return $output;
     }
 
