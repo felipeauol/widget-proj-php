@@ -2,26 +2,15 @@
 <?php include("../includes/layouts/header.html")?>
 <?php require_once("../includes/functions.php")?>
 
-<?php
-if(isset($_GET["subject"])){
-    $selected_subject_id = $_GET["subject"];
-    $selected_page_id = null;
-    }elseif (isset($_GET["page"])){
-        $selected_page_id = $_GET["page"];
-        $selected_subject_id = null;
-    }else {
-        $selected_subject_id = null;
-        $selected_page_id = null;
-    }
-?>
+<?php find_selected_page() ?>
 <div id="main">
 <div id="navigation">
     <?php
     echo navigation($selected_subject_id,$selected_page_id);
 ?>
 </div>
-        <div id="page">
-            <h2>Manage Content</h2>
+<div id="page">
+<h2>Manage Content</h2>
 
             <?php echo message(); ?>
 

@@ -1,17 +1,32 @@
-<!doctype html>
+<?php include("../includes/layouts/header.html")?>
+<?php require_once("../includes/functions.php")?>
 
-<html>
-	<head>
-		<title>Main Page</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="initial-scale=1.0">
-	</head>
+<?php find_selected_page() ?>
 
-	<body>
+<div id="main">
+<div id="navigation">
+    <?php echo public_navigation($selected_subject_id,$selected_page_id); ?>
+</div>
+    <div id="page">
+    <h2>View Content</h2>
+        <?php
+            if(isset($selected_subject_id)){
+                $current_subject = find_subject_by_id($selected_subject_id);
+                echo "Subject: " . htmlentities($current_subject['menu_name']);
+            }
+            elseif(isset($selected_page_id)){
+                $current_page = find_page_by_id($selected_page_id);
+                echo htmlentities($current_page['menu_name']);
+        ?>
+            <div class="view-content">
+                <?php echo htmlentities($current_page['content']);?>
+            </div>
+                <?php
+            }else{
+                echo "Please select a page";
+            } ?>
+    </div>
+</div>
+<?php include("../includes/layouts/footer.html")?>
 
-
-
-
-
-	</body>
-</html>
+<?php mysqli_close($connection); ?>
