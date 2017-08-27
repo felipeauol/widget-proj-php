@@ -9,18 +9,22 @@
     <?php echo public_navigation($selected_subject_id,$selected_page_id); ?>
 </div>
     <div id="page">
-    <h2>View Content</h2>
+    <h2><?php  if(isset($selected_page_id)){
+                    $current_page = find_page_by_id($selected_page_id);
+                    echo htmlentities($current_page['menu_name']);
+                }
+        ?></h2>
         <?php
             if(isset($selected_page_id)){
                 $current_page = find_page_by_id($selected_page_id);
-                echo htmlentities($current_page['menu_name']);
         ?>
-            <div class="view-content">
-                <?php echo htmlentities($current_page['content']);?>
+            <div>
+                <?php if(isset($selected_page_id)){
+                    echo nl2br(htmlentities($current_page['content']));}?>
             </div>
                 <?php
             }else{
-                echo "Please select a page";
+                echo "Welcome!";
             } ?>
     </div>
 </div>
