@@ -10,7 +10,7 @@ if(!$subject){
     redirect_to("manage_contents.php");
 }
 
-$pages_on_subject = find_pages_for_subject($subject['id']);
+$pages_on_subject = find_pages_for_subject($subject['id'],false);
 if(mysqli_num_rows($pages_on_subject) > 0 ){
     $_SESSION['message'] = "Cannot delete subject with pages";
     redirect_to("edit_subject?subject={$subject['id']}");

@@ -1,5 +1,6 @@
 <?php require_once("../includes/session.php")?>
-<?php include("../includes/layouts/header.html")?>
+<?php $layout_context = "admin";?>
+<?php include("../includes/layouts/header.php") ?>
 <?php require_once("../includes/functions.php")?>
 <?php require_once("../includes/validation_functions.php")?>
 
@@ -13,7 +14,7 @@ if(isset($_POST['submit'])) {
     $content = mysqli_prep($_POST['content']);
     $visible = $_POST['visible'];
 
-    $page_count = mysqli_num_rows(find_pages_for_subject($parent_subject_id));
+    $page_count = mysqli_num_rows(find_pages_for_subject($parent_subject_id,false));
     $new_position = $page_count +1;
 
     $query = "INSERT INTO pages ";
@@ -73,7 +74,7 @@ if(isset($_POST['submit'])) {
                 <p>Select Parent Subject:
                     <select name="parent_subject">
                         <?php
-                        $subjects = find_all_subjects();
+                        $subjects = find_all_subjects(false);
                         while($subject_row = mysqli_fetch_assoc($subjects)) {
                             echo "<option value=\"{$subject_row['id']}\">{$subject_row['menu_name']}</option>";
                         }

@@ -1,11 +1,12 @@
 <?php require_once("../includes/session.php")?>
-<?php include("../includes/layouts/header.html")?>
+<?php $layout_context = "admin"?>
+<?php include("../includes/layouts/header.php") ?>
 <?php require_once("../includes/functions.php")?>
 
 <?php find_selected_page() ?>
 <div id="main">
 <div id="navigation">
-    <?php
+<?php
     echo navigation($selected_subject_id,$selected_page_id);
 ?>
 </div>

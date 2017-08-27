@@ -19,12 +19,12 @@
 
 <html lang="en">
 <head>
-    <title>Widget Inc.</title>
+    <title>Widget Inc. <?php if($layout_context == "admin"){ echo " - Administrator Dashboard";}?></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
     <link href="./css/public.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="header">
-    <h1>Widget Inc</h1>
+    <h1>Widget Inc<?php if($layout_context == "admin"){ echo " - Administrator Dashboard";}?></h1>
 </div>

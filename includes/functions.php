@@ -17,12 +17,13 @@
 		}
 	}
 
-	function find_all_subjects(){
+	function find_all_subjects($public = true){
        	global $connection;
 
         $query  = "SELECT * ";
         $query .= "FROM subjects ";
-        $query .= "WHERE visible = 1 ";
+            if($public==true){
+                $query .= "WHERE visible = 1 ";}
         $query .= "ORDER BY position ASC";
         $query .= ";";
         $subject_set = mysqli_query($connection,$query);
@@ -30,13 +31,14 @@
 
         return $subject_set;
 }
-	function find_pages_for_subject($subject_id){
+	function find_pages_for_subject($subject_id, $public = true){
 		global $connection;
 
         $query = "SELECT * ";
         $query .= "FROM pages ";
-        $query .= "WHERE visible = 1 ";
-        $query .= "AND subject_id = $subject_id ";
+        $query .= "WHERE subject_id = $subject_id ";
+            if($public==true){
+                $query .= "AND visible = 1 ";}
         $query .= "ORDER BY position ASC ";
         $query .= ";";
         $page_set = mysqli_query($connection,$query);
@@ -97,8 +99,9 @@
     }
 
 	function navigation($subject_id, $page_id){
+        $public = false;
     $output = "<ul class=\"subjects\">";
-    $subject_set = find_all_subjects();
+    $subject_set = find_all_subjects(false);
 
         while ($subject_row = mysqli_fetch_assoc($subject_set)) {
 
@@ -114,7 +117,7 @@
             $output .= $subject_row['menu_name'];
             $output .= "</a>";
 
-            $page_set = find_pages_for_subject($subject_row['id']);
+            $page_set = find_pages_for_subject($subject_row['id'], false);
 
 
             $output .= "<ul class=\"pages\">";
@@ -144,7 +147,7 @@
     }
     function public_navigation($subject_id, $page_id){
     $output = "<ul class=\"subjects\">";
-    $subject_set = find_all_subjects();
+    $subject_set = find_all_subjects(true);
 
     while ($subject_row = mysqli_fetch_assoc($subject_set)) {
 
@@ -160,23 +163,25 @@
         $output .= $subject_row['menu_name'];
         $output .= "</a>";
 
-        $page_set = find_pages_for_subject($subject_row['id']);
+        if($subject_id == $subject_row['id']) {
+            $page_set = find_pages_for_subject($subject_row['id'],true);
 
-
-        $output .= "<ul class=\"pages\">";
-        while ($page_row = mysqli_fetch_assoc($page_set)) {
-            $output .= "<li";
-            if ($page_id == $page_row['id']) {
-                $output .= " class=\"selected\"";
+            $output .= "<ul class=\"pages\">";
+            while ($page_row = mysqli_fetch_assoc($page_set)) {
+                $output .= "<li";
+                if ($page_id == $page_row['id']) {
+                    $output .= " class=\"selected\"";
+                }
+                $output .= ">";
+                $output .= "<a href=\"index.php?page=";
+                $output .= urlencode($page_row['id']);
+                $output .= "\">";
+                $output .= $page_row['menu_name'];
+                $output .= "</a></li>";
             }
-            $output .= ">";
-            $output .= "<a href=\"index.php?page=";
-            $output .= urlencode($page_row['id']);
-            $output .= "\">";
-            $output .= $page_row['menu_name'];
-            $output .= "</a></li>";
+            $output .= "</ul>";
         }
-        $output .= "</ul></li>";
+        $output .= "</li>";
     }
     $output .= "</ul>";
     

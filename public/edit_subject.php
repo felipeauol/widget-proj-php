@@ -1,5 +1,6 @@
 <?php require_once("../includes/session.php")?>
-<?php include("../includes/layouts/header.html")?>
+<?php $layout_context = "admin"?>
+<?php include("../includes/layouts/header.php") ?>
 <?php require_once("../includes/functions.php")?>
 <?php require_once("../includes/validation_functions.php")?>
 
@@ -86,7 +87,7 @@ if (!$selected_subject_id) {
             <p>Position:
                 <select name="position">
                     <?php
-                    $subject_count = mysqli_num_rows(find_all_subjects());
+                    $subject_count = mysqli_num_rows(find_all_subjects(false));
                     for($count=1; $count <= ($subject_count); $count++) {
                         echo "<option value=\"{$count}\" ";
                             if( isset($selected_subject_id) && $count == $subject['position']) {

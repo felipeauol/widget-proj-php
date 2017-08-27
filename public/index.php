@@ -1,4 +1,5 @@
-<?php include("../includes/layouts/header.html")?>
+<?php $layout_context = "public";?>
+<?php include("../includes/layouts/header.php") ?>
 <?php require_once("../includes/functions.php")?>
 
 <?php find_selected_page() ?>

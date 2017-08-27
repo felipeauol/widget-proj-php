@@ -1,5 +1,6 @@
 <?php require_once("../includes/session.php")?>
-<?php include("../includes/layouts/header.html")?>
+<?php $layout_context = "admin";?>
+<?php include("../includes/layouts/header.php") ?>
 <?php require_once("../includes/functions.php")?>
 <?php require_once("../includes/validation_functions.php")?>
 
@@ -35,7 +36,7 @@ redirect_to("manage_contents.php");
         $safe_content = mysqli_real_escape_string($connection,$content);
 
         // Look up page within subject that currently holds the new position
-        $page_set = find_pages_for_subject($current_page['subject_id']);
+        $page_set = find_pages_for_subject($current_page['subject_id'],false);
         while ($subject_row = mysqli_fetch_assoc($page_set)) {
             if($subject_row['position'] == $new_position){
                 $swap_page = $subject_row;
@@ -108,7 +109,7 @@ redirect_to("manage_contents.php");
             <p>Position:
                 <select name="position">
                     <?php
-                    $page_count = mysqli_num_rows(find_pages_for_subject($page['subject_id']));
+                    $page_count = mysqli_num_rows(find_pages_for_subject($page['subject_id'],false));
                     for($count=1; $count <= ($page_count); $count++) {
                         echo "<option value=\"{$count}\" ";
                             if( isset($selected_page_id) && $count == $page['position']) {
