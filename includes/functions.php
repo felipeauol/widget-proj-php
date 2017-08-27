@@ -68,7 +68,6 @@
         global $connection;
 
         $safe_id = mysqli_real_escape_string($connection,$page_id);
-
         $query  = "SELECT * ";
         $query .= "FROM pages ";
         $query .= "WHERE id = {$safe_id} ";
@@ -82,13 +81,24 @@
             return null;
         }
     }
-    function find_selected_page(){
+    function find_default_page($subject_id){
+        $page_set = find_pages_for_subject($subject_id);
+        if($first_page = mysqli_fetch_assoc($page_set)){
+            return $first_page['id'];
+        }else return null;
+
+    }
+
+    function find_selected_page($public = false){
         global $selected_subject_id;
         global $selected_page_id;
 
         if(isset($_GET["subject"])){
             $selected_subject_id = $_GET["subject"];
-            $selected_page_id = null;
+            if($public == true){
+                $selected_page_id = find_default_page($selected_subject_id);
+            }else $selected_page_id = null;
+
         }elseif (isset($_GET["page"])){
             $selected_page_id = $_GET["page"];
             $selected_subject_id = null;

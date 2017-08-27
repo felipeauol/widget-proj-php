@@ -2,7 +2,7 @@
 <?php include("../includes/layouts/header.php") ?>
 <?php require_once("../includes/functions.php")?>
 
-<?php find_selected_page() ?>
+<?php find_selected_page(true) ?>
 
 <div id="main">
 <div id="navigation">
@@ -11,11 +11,7 @@
     <div id="page">
     <h2>View Content</h2>
         <?php
-            if(isset($selected_subject_id)){
-                $current_subject = find_subject_by_id($selected_subject_id);
-                echo "Subject: " . htmlentities($current_subject['menu_name']);
-            }
-            elseif(isset($selected_page_id)){
+            if(isset($selected_page_id)){
                 $current_page = find_page_by_id($selected_page_id);
                 echo htmlentities($current_page['menu_name']);
         ?>
