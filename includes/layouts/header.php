@@ -15,6 +15,11 @@
   }
 ?>
 
+<?php
+    if(!isset($layout_context)){
+        $layout_context = "public";
+    }
+?>
 <!doctype HTML>
 
 <html lang="en">

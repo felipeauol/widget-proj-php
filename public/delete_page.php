@@ -24,4 +24,5 @@ if($result && mysqli_affected_rows($connection) == 1) {
     $_SESSION['message'] = "Deletion Failed";
     redirect_to("edit_subject?subject={$page['id']}");
 }
+
 ?>

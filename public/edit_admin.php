@@ -12,12 +12,13 @@
 
 <?php
     if(isset($_POST['submit'])){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = mysqli_prep($_POST['username']);
+        $password = mysqli_prep($_POST['password']);
 
         $query =  "UPDATE admins ";
         $query .= "SET username = '{$username}', hashed_password = '{$password}' ";
         $query .= "WHERE id = $selected_admin ";
+        $query .= "LIMIT 1";
         $query .= ";";
 
         $result = mysqli_query($connection, $query);

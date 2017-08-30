@@ -4,6 +4,10 @@
 <?php require_once("../includes/functions.php")?>
 
 <?php $all_admins = find_all_admins();?>
+<div id="navigation">
+        <a href="create_admin.php"> Create Admin </a>
+</div>
+
 <div id="page">
     <h2>Manage Admins</h2>
         <?php message()?>
