@@ -198,6 +198,37 @@
     return $output;
 }
 
+    function find_all_admins(){
+        global $connection;
+
+        $query =  "SELECT * FROM admins ";
+        $query .= "ORDER BY username;";
+
+        $admin_set = mysqli_query($connection,$query);
+        confirm_query($admin_set);
+
+        return $admin_set;
+    };
+    function find_admin_by_id($admin_id){
+        global $connection;
+
+        $query =  "SELECT * FROM admins ";
+        $query .= "WHERE id = $admin_id;";
+
+        $admin = mysqli_query($connection,$query);
+        confirm_query($admin);
+        $admin = mysqli_fetch_assoc($admin);
+
+        return $admin;
+    }
+    function find_selected_admin(){
+        global $selected_admin;
+        if(isset($_GET['id'])){
+            $selected_admin = $_GET['id'];
+        }else $selected_admin = null;
+    }
+
+
     function form_errors($errors=array()) {
         $output = "";
         if (!empty($errors)) {

@@ -76,3 +76,14 @@ div.error {
 	margin: 1em 0; padding: 1em;
 }
 .error ul { padding-left: 2em; }
+
+
+/*Table Content*/
+
+table {
+	border-spacing: 5px;
+}
+
+th, td {
+	padding: 5px;
+}

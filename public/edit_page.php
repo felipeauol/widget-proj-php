@@ -69,7 +69,7 @@ redirect_to("manage_contents.php");
 ?>
 
     <div id="main" xmlns="http://www.w3.org/1999/html">
-        <div id="navigation">
+    <div id="navigation">
             <?php
             echo navigation($selected_subject_id,$selected_page_id);
             ?>
