@@ -6,11 +6,11 @@
 <?php
 if(isset($_POST['submit'])) {
     $username = mysqli_prep($_POST['username']);
-    $password = mysqli_prep($_POST['password']);
+    $hashed_password = password_encrypt($_POST['password']);
 
     $query = "INSERT INTO admins ";
     $query .= "(username, hashed_password) ";
-    $query .= "VALUES ('$username', '$password')";
+    $query .= "VALUES ('$username', '$hashed_password')";
     $query .= ";";
 
     $result = mysqli_query($connection, $query);
@@ -24,11 +24,9 @@ if(isset($_POST['submit'])) {
 
 <div id="main" xmlns="http://www.w3.org/1999/html">
     <div id="navigation">
-        <h2>Edit Admins</h2>
-        <a href="create_admin.php">Create Admin</a><br/>
-        <a href="manage_admins.php">Manage Admins</a>
     </div>
     <div id="page">
+        <h2>Create Admin</h2>
         <?php if(isset($message)){echo $message;}?>
         <div id="form">
 
@@ -38,12 +36,14 @@ if(isset($_POST['submit'])) {
                 <p>Username:
                     <input name="username" value="">
                 </p>
-                <p>Password:
+                <p>Password:&nbsp;
                     <input type="password" name="password" value="">
                 </p>
-                <input type="submit" name="submit" value="Submit">
+                <input type="submit" name="submit" value="Create Admin">
             </form>
         </div>
+        <br/>
+        <a href="manage_admins.php">Cancel</a>
     </div>
 </div>
 

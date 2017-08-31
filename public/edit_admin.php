@@ -13,7 +13,7 @@
 <?php
     if(isset($_POST['submit'])){
         $username = mysqli_prep($_POST['username']);
-        $password = mysqli_prep($_POST['password']);
+        $password = password_encrypt($_POST['password']);
 
         $query =  "UPDATE admins ";
         $query .= "SET username = '{$username}', hashed_password = '{$password}' ";
