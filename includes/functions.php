@@ -235,6 +235,20 @@
 
         return $admin;
     }
+    function find_admin_by_username($username){
+    global $connection;
+
+    $username = mysqli_real_escape_string($connection,$username);
+
+    $query =  "SELECT * FROM admins ";
+    $query .= "WHERE username = '{$username}';";
+
+    $admin = mysqli_query($connection,$query);
+    confirm_query($admin);
+    $admin = mysqli_fetch_assoc($admin);
+
+    return $admin;
+}
     function find_selected_admin(){
         global $selected_admin;
         if(isset($_GET['id'])){
@@ -242,6 +256,22 @@
         }else $selected_admin = null;
     }
 
+    function generate_salt($length){
+    // Generate a satisfactorily random and unique salt
+    // MD5 returns 32 characters
+    $unique_random_string = md5(uniqid(mt_rand(),true));
+
+    // Convert to valid characters for a salt: [a-zA-Z0-9./]
+    $base64_string = base64_encode($unique_random_string);
+
+    // Previous function converts '.' to '+'. Need to change back
+    $modified_base64_string = str_replace('+','.',$base64_string);
+
+    //Truncate the random string to the correct number of characters
+    $salt = substr($modified_base64_string,0,$length);
+
+    return $salt;
+}
     function password_encrypt($password){
         //Tells PHP to use blowfish (2y) and run the hashing function 10 times
         $hash_format = "$2y$10$";
@@ -252,31 +282,27 @@
         $hash = crypt($password,$format_and_salt);
             return $hash;
     }
-
-    function generate_salt($length){
-        // Generate a satisfactorily random and unique salt
-        // MD5 returns 32 characters
-        $unique_random_string = md5(uniqid(mt_rand(),true));
-
-        // Convert to valid characters for a salt: [a-zA-Z0-9./]
-        $base64_string = base64_encode($unique_random_string);
-
-        // Previous function converts '.' to '+'. Need to change back
-        $modified_base64_string = str_replace('+','.',$base64_string);
-
-        //Truncate the random string to the correct number of characters
-        $salt = substr($modified_base64_string,0,$length);
-
-            return $salt;
-    }
-
     function password_check($password,$existing_hash){
-        //
-        $hash = crypt($password,$existing_hash);
-        if ($hash === $existing_hash) {
-            return true;
-        } else {
-            return false;
-        }
+    //
+    $hash = crypt($password,$existing_hash);
+    if ($hash === $existing_hash) {
+        return true;
+    } else {
+        return false;
     }
+}
+
+    function attempt_login($username,$password){
+        $admin = find_admin_by_username($username);
+
+        if($admin){
+            if(password_check($password,$admin['hashed_password'])){
+                return $admin;
+            } else {return false;}
+        } else {return false;}
+    }
+
+
+
+
 
