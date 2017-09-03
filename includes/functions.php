@@ -302,6 +302,15 @@
         } else {return false;}
     }
 
+    function log_in_status(){
+        return isset($_SESSION['admin_id']);
+    }
+    function confirm_logged_in(){
+        if(!log_in_status()){
+          redirect_to('login.php');
+        }
+    }
+
 
 
 

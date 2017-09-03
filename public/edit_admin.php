@@ -3,6 +3,8 @@
 <?php include("../includes/layouts/header.php") ?>
 <?php require_once("../includes/functions.php")?>
 <?php require_once("../includes/validation_functions.php")?>
+<?php require_once("../includes/session.php")?>
+<?php confirm_logged_in()?>
 
 <?php find_selected_admin();
     if(isset($selected_admin)){
